@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #f0f2f5;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .navbar {
+      background-color: #1e3a8a;
+    }
+
+    .navbar a {
+      color: #ffffff !important;
+      font-size: 20px;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+    }
+
+    .weather-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .city-name {
+      font-size: 32px;
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+
+    .weather-cards {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      background-color: #1e3a8a;
+      color: white;
+      text-align: center;
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    .card-body {
+      padding: 25px;
+      background-color: #f9fafb;
+    }
+
+    .card-title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .card-text {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .search-bar input {
+      width: 300px;
+      border-radius: 30px 0 0 30px;
+      border: 2px solid #1e3a8a;
+      padding: 10px;
+      font-size: 18px;
+    }
+
+    .search-bar button {
+      border-radius: 0 30px 30px 0;
+      background-color: #1e3a8a;
+      color: white;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .search-bar button:hover {
+      background-color: #1b2d63;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">WeatherApp</a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="weather-container">
+    <div class="search-bar">
+      <input id="city" type="text" class="form-control" placeholder="Search city">
+      <button id="submit" class="btn btn-primary">Search</button>
+    </div>
+
+    <div class="city-name" id="cityName">City Name</div>
+
+    <!-- Weather Info Cards -->
+    <div class="weather-cards">
+      <div class="card">
+        <div class="card-header">Temperature</div>
+        <div class="card-body">
+          <div class="card-title" id="temp">N/A</div>
+          <p class="card-text">Current Temperature (°C)</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Humidity</div>
+        <div class="card-body">
+          <div class="card-title" id="humidity">N/A</div>
+          <p class="card-text">Humidity (%)</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Wind Speed</div>
+        <div class="card-body">
+          <div class="card-title" id="wind_speed">N/A</div>
+          <p class="card-text">Wind Speed (km/h)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="weather-cards">
+      <div class="card">
+        <div class="card-header">Feels Like</div>
+        <div class="card-body">
+          <div class="card-title" id="feels_like">N/A</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Min Temp</div>
+        <div class="card-body">
+          <div class="card-title" id="min_temp">N/A</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Max Temp</div>
+        <div class="card-body">
+          <div class="card-title" id="max_temp">N/A</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sunrise and Sunset -->
+    <div class="weather-cards">
+      <div class="card">
+        <div class="card-header">Sunrise</div>
+        <div class="card-body">
+          <div class="card-title" id="sunrise">N/A</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Sunset</div>
+        <div class="card-body">
+          <div class="card-title" id="sunset">N/A</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Made with ❤️ by <a href="https://github.com/" target="_blank">Your Name</a></p>
+  </div>
+
+  <!-- JS and Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    const cityInput = document.getElementById('city');
+    const submitButton = document.getElementById('submit');
+    const temp = document.getElementById('temp');
+    const feels_like = document.getElementById('feels_like');
+    const humidity = document.getElementById('humidity');
+    const min_temp = document.getElementById('min_temp');
+    const max_temp = document.getElementById('max_temp');
+    const wind_speed = document.getElementById('wind_speed');
+    const wind_degrees = document.getElementById('wind_degrees');
+    const sunrise = document.getElementById('sunrise');
+    const sunset = document.getElementById('sunset');
+    const cityName = document.getElementById('cityName');
+
+    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+
+    const getWeather = (city) => {
+      cityName.innerHTML = city;
+      fetch(`https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=${city}`, {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-key': apiKey,
+          'x-rapidapi-host': 'weather-by-api-ninjas.p.rapidapi.com'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+  // Checking each weather property and ensuring that you show a default value if it's missing
+
+// Temperature (Main)
+temp.innerHTML = data.main && data.main.temp !== undefined ? `${data.main.temp}°C` : '0°C';
+
+// Feels like
+feels_like.innerHTML = data.main && data.main.feels_like !== undefined ? `${data.main.feels_like}°C` : '0°C';
+
+// Humidity
+humidity.innerHTML = data.main && data.main.humidity !== undefined ? `${data.main.humidity}%` : '--%';
+
+// Min Temperature
+min_temp.innerHTML = data.main && data.main.temp_min !== undefined ? `${data.main.temp_min}°C` : '0°C';
+
+// Max Temperature
+max_temp.innerHTML = data.main && data.main.temp_max !== undefined ? `${data.main.temp_max}°C` : '0°C';
+
+// Wind Speed
+wind_speed.innerHTML = data.wind && data.wind.speed !== undefined ? `${data.wind.speed} km/h` : '0 km/h';
+
+// Wind Direction
+wind_degrees.innerHTML = data.wind && data.wind.deg !== undefined ? `${data.wind.deg}°` : '--°';
+
+// Sunrise (convert timestamp to time)
+sunrise.innerHTML = data.sys && data.sys.sunrise !== undefined ? new Date(data.sys.sunrise * 1000).toLocaleTimeString() : '--';
+
+// Sunset (convert timestamp to time)
+sunset.innerHTML = data.sys && data.sys.sunset !== undefined ? new Date(data.sys.sunset * 1000).toLocaleTimeString() : '--';
+
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error fetching data. Please check your internet connection or try again later.");
+      });
+    };
+
+    submitButton.addEventListener('click', () => {
+      const city = cityInput.value.trim();
+      if (city) {
+        getWeather(city);
+      } else {
+        alert("Please enter a city name.");
+      }
+    });
+
+    // Default city weather
+    document.addEventListener('DOMContentLoaded', () => {
+      getWeather("Delhi");
+    });
+  </script>
+</body>
+</html>
